@@ -249,3 +249,8 @@ def on_startup():
 # Serve the frontend last so /api/* routes above take priority.
 if FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", host=config.HOST, port=config.PORT)
