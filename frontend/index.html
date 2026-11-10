@@ -1,1 +1,59 @@
-<html><body>placeholder</body></html>
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Deepfake &amp; AI-Content Detector</title>
+<link rel="stylesheet" href="/static/css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>" />
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◎</span>
+      <span class="brand-name">Deepfake &amp; AI-Content Detector</span>
+      <span class="local-pill" title="Nothing leaves this machine unless you explicitly enable a lookup">Local-only</span>
+    </div>
+    <nav class="main-nav" id="main-nav">
+      <button class="nav-btn active" data-route="analyze">Analyze</button>
+      <button class="nav-btn" data-route="history">History</button>
+      <button class="nav-btn" data-route="compare">Compare</button>
+      <button class="nav-btn" data-route="settings">Settings</button>
+    </nav>
+    <div class="topbar-actions">
+      <button id="theme-toggle" class="icon-btn" title="Toggle dark/light (key: t)">🌙</button>
+      <button id="shortcuts-btn" class="icon-btn" title="Keyboard shortcuts (key: ?)">⌘</button>
+    </div>
+  </header>
+
+  <main id="view-root" class="view-root"></main>
+
+  <footer class="app-footer">
+    <span>Evidence to help you judge content -- not proof. "Inconclusive" is a normal result.</span>
+  </footer>
+</div>
+
+<div id="toast-root" class="toast-root"></div>
+<div id="modal-root" class="modal-root hidden"></div>
+
+<template id="tmpl-shortcuts">
+  <div class="modal-card">
+    <h3>Keyboard shortcuts</h3>
+    <ul class="shortcut-list">
+      <li><kbd>1</kbd>-<kbd>4</kbd> Switch tabs (Analyze/History/Compare/Settings)</li>
+      <li><kbd>u</kbd> Open file picker (on Analyze tab)</li>
+      <li><kbd>/</kbd> Focus search (on History tab)</li>
+      <li><kbd>t</kbd> Toggle dark/light theme</li>
+      <li><kbd>Esc</kbd> Close dialog / report view</li>
+      <li><kbd>?</kbd> Show this help</li>
+    </ul>
+    <button class="btn" data-close>Close</button>
+  </div>
+</template>
+
+<script src="/static/js/api.js"></script>
+<script src="/static/js/render.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

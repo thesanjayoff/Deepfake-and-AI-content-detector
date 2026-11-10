@@ -102,8 +102,13 @@ def analyze_text(path: Path, settings: dict[str, str], report_id: str) -> dict[s
     scam = text_forensics.scam_text_indicators(text)
     meta_signal = metadata.analyze_text_file_metadata(path)
 
-    signals = [meta_signal, burst, rep, style, perplex, scam]
-    combination = combine(signals, qw)
+    # Scam/fraud language is a DIFFERENT question from "is this AI-written or
+    # manipulated" -- a scam message is almost always 100% human-typed. It is
+    # shown in the report but deliberately excluded from the authenticity
+    # combination so it can never flip the AI/manipulation verdict.
+    authenticity_signals = [meta_signal, burst, rep, style, perplex]
+    combination = combine(authenticity_signals, qw)
+    signals = authenticity_signals + [scam]
 
     return {
         "media_type": "text",
