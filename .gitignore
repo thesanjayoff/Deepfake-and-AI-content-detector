@@ -1,0 +1,13 @@
+backend/.venv/
+backend/data/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+node_modules/
+.DS_Store
+*.db
+backend/tests/fixtures/*.jpg
+backend/tests/fixtures/*.wav
+backend/tests/fixtures/*.txt
+!backend/tests/fixtures/make_fixtures.py

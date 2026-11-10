@@ -1,0 +1,8 @@
+# Optional, heavier extras for model-based signals (GPT-2 text perplexity,
+# Hugging Face AI-image detector). Off by default. Install with:
+#   pip install -r requirements-ml.txt
+# These download model weights from Hugging Face on first use, which only
+# happens if you also enable "Use optional ML models" in Settings (fully
+# local mode blocks the download).
+torch==2.5.1
+transformers==4.47.1
