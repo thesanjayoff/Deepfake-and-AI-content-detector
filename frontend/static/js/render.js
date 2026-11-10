@@ -113,6 +113,16 @@ const Render = (() => {
       }).join("") + `</div><div class="muted">Each bar is a sampled frame; red bars are statistical outliers worth a closer look.</div>`;
   }
 
+  function externalLookups(lookups) {
+    if (!lookups || !lookups.length) return "";
+    return `<div class="section-title">External lookups (opt-in, opens your browser)</div>` +
+      lookups.map(l => `
+        <div class="quality-warning" style="border-left-color:var(--accent); background:var(--accent-soft)">
+          <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer"><b>${escapeHtml(l.label)}</b></a>
+          <div class="muted" style="margin-top:3px">${escapeHtml(l.note)}</div>
+        </div>`).join("");
+  }
+
   function verificationSteps(steps) {
     if (!steps || !steps.length) return "";
     return `<div class="section-title">Recommended human verification steps</div>
@@ -156,6 +166,7 @@ const Render = (() => {
       specifics += `<div class="section-title">Robustness note</div>` +
         report.robustness_note.notes.map(n => `<p class="muted">${escapeHtml(n)}</p>`).join("");
     }
+    if (report.external_lookups) specifics += externalLookups(report.external_lookups);
 
     return `
       <div class="muted" style="margin-bottom:10px">${mediaLine}</div>
@@ -176,7 +187,7 @@ const Render = (() => {
 
   return {
     escapeHtml, verdictBanner, qualityWarnings, signalList, attachSignalToggles,
-    evidenceGrid, timelineChart, verificationSteps, scamChecklist, tagChips,
+    evidenceGrid, timelineChart, verificationSteps, scamChecklist, tagChips, externalLookups,
     mandatoryWarning, textPreview, fullReport, VERDICT_LABEL, MEDIA_ICON,
   };
 })();

@@ -121,21 +121,35 @@ def error_level_analysis(path: Path, quality: int = 90) -> tuple[Signal, bytes |
     global_mean = float(diff_gray.mean())
     global_std = float(diff_gray.std())
     block_std = float(block_means.std())
-    # High block-to-block variance (some regions much "hotter" than others)
-    # is the actual splicing signal -- uniform ELA brightness is normal.
-    heterogeneity = block_std / (block_means.mean() + 1e-6)
+    block_mean_of_means = float(block_means.mean())
 
-    strength = float(np.clip((heterogeneity - 0.5) / 2.0, 0.0, 1.0))
-    direction = float(np.clip((heterogeneity - 0.8) / 1.5, -0.2, 1.0)) if heterogeneity > 0.8 else -0.1
-
-    summary = (
-        f"Mean ELA response {global_mean:.2f} (std {global_std:.2f}), block-level heterogeneity "
-        f"{heterogeneity:.2f}. "
-        + ("Some regions show notably higher recompression error than the rest, consistent with "
-           "localized editing." if heterogeneity > 0.8 else
-           "Recompression error looks fairly uniform across the image, with no strongly isolated "
-           "high-error regions.")
-    )
+    # When the image recompresses almost losslessly (e.g. it's already at or
+    # below the ELA re-save quality), the absolute error is tiny and the
+    # RATIO used for heterogeneity becomes numerically unstable -- dividing
+    # small noise by a near-zero denominator can blow up to huge, meaningless
+    # values. Below this floor, heterogeneity isn't assessable at all.
+    MIN_ASSESSABLE_MEAN_ERROR = 0.5
+    if block_mean_of_means < MIN_ASSESSABLE_MEAN_ERROR:
+        heterogeneity = 0.0
+        strength = 0.1
+        direction = -0.05
+        summary = (
+            f"Mean ELA response {global_mean:.2f} is too low to assess heterogeneity reliably -- "
+            f"this image recompresses almost losslessly at the test quality, which can happen for "
+            f"genuine photos saved at or below that quality level, not just edited ones."
+        )
+    else:
+        heterogeneity = block_std / block_mean_of_means
+        strength = float(np.clip((heterogeneity - 0.5) / 2.0, 0.0, 1.0))
+        direction = float(np.clip((heterogeneity - 0.8) / 1.5, -0.2, 1.0)) if heterogeneity > 0.8 else -0.1
+        summary = (
+            f"Mean ELA response {global_mean:.2f} (std {global_std:.2f}), block-level heterogeneity "
+            f"{heterogeneity:.2f}. "
+            + ("Some regions show notably higher recompression error than the rest, consistent with "
+               "localized editing." if heterogeneity > 0.8 else
+               "Recompression error looks fairly uniform across the image, with no strongly isolated "
+               "high-error regions.")
+        )
 
     original_u8 = original.astype(np.uint8)
     heatmap_png = None

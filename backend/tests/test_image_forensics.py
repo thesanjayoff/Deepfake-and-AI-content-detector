@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from app.forensics.image_forensics import copy_move_detection, noise_residual_analysis
+from PIL import Image
+
+from app.forensics.image_forensics import copy_move_detection, error_level_analysis, noise_residual_analysis
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
@@ -22,3 +24,18 @@ def test_noise_residual_runs_without_crashing_on_plain_photo():
     sig, heatmap = noise_residual_analysis(FIXTURES / "plain_photo.jpg")
     assert 0.0 <= sig.strength <= 1.0
     assert heatmap is not None
+
+
+def test_ela_does_not_false_positive_on_near_lossless_recompression(tmp_path):
+    # Regression test: when an image recompresses almost losslessly (tiny
+    # absolute ELA error), the heterogeneity RATIO used to blow up toward
+    # infinity and falsely saturate direction/strength to 1.0 on ordinary,
+    # unedited images. See image_forensics.error_level_analysis.
+    with Image.open(FIXTURES / "plain_photo.jpg") as im:
+        small = im.convert("RGB").resize((160, 120))
+        path = tmp_path / "near_lossless.jpg"
+        small.save(path, "JPEG", quality=90)
+
+    sig, _ = error_level_analysis(path, quality=90)
+    assert sig.direction < 0.3
+    assert sig.strength < 0.3

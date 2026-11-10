@@ -1,0 +1,310 @@
+{
+  "disclaimer": "This evaluation runs on a small, self-generated, synthetic demonstration set (see eval/README.md), NOT on FaceForensics++/DFDC/Celeb-DF/ASVspoof/real AI-image or AI-text datasets. These numbers show the harness works and give a rough internal sanity check -- they are NOT a claim of real-world accuracy and must not be read as one.",
+  "images": {
+    "n_total": 30,
+    "n_abstained": 28,
+    "n_decided": 2,
+    "abstention_rate": 0.9333,
+    "accuracy": 0.5,
+    "precision": 0.5,
+    "recall": 1.0,
+    "false_positive_rate": 1.0,
+    "confusion": {
+      "tp": 1,
+      "fp": 1,
+      "tn": 0,
+      "fn": 0
+    },
+    "calibration": {
+      "ece": 0.0726,
+      "bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "count": 26,
+          "avg_confidence": 0.478,
+          "accuracy": 0.462
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "count": 2,
+          "avg_confidence": 0.534,
+          "accuracy": 1.0
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "count": 1,
+          "avg_confidence": 0.693,
+          "accuracy": 0.0
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "count": 1,
+          "avg_confidence": 0.87,
+          "accuracy": 1.0
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        }
+      ]
+    }
+  },
+  "audio": {
+    "n_total": 20,
+    "n_abstained": 20,
+    "n_decided": 0,
+    "abstention_rate": 1.0,
+    "accuracy": null,
+    "precision": null,
+    "recall": null,
+    "false_positive_rate": null,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0
+    },
+    "calibration": {
+      "ece": 0.3758,
+      "bins": [
+        {
+          "bin_range": [
+            0.0,
+            0.1
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.1,
+            0.2
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.2,
+            0.3
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.3,
+            0.4
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.4,
+            0.5
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.5,
+            0.6
+          ],
+          "count": 12,
+          "avg_confidence": 0.528,
+          "accuracy": 0.167
+        },
+        {
+          "bin_range": [
+            0.6,
+            0.7
+          ],
+          "count": 8,
+          "avg_confidence": 0.603,
+          "accuracy": 1.0
+        },
+        {
+          "bin_range": [
+            0.7,
+            0.8
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.8,
+            0.9
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        },
+        {
+          "bin_range": [
+            0.9,
+            1.0
+          ],
+          "count": 0,
+          "avg_confidence": null,
+          "accuracy": null
+        }
+      ]
+    }
+  },
+  "text": {
+    "n_total": 26,
+    "n_abstained": 13,
+    "n_decided": 13,
+    "abstention_rate": 0.5,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "false_positive_rate": null,
+    "confusion": {
+      "tp": 13,
+      "fp": 0,
+      "tn": 0,
+      "fn": 0
+    },
+    "human_text_false_positive_rate": 0.0,
+    "human_text_false_positives": 0,
+    "human_text_total": 13
+  },
+  "image_robustness": {
+    "recompressed_q45": {
+      "n_total": 30,
+      "n_abstained": 30,
+      "n_decided": 0,
+      "abstention_rate": 1.0,
+      "accuracy": null,
+      "precision": null,
+      "recall": null,
+      "false_positive_rate": null,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      }
+    },
+    "resized_50pct": {
+      "n_total": 30,
+      "n_abstained": 30,
+      "n_decided": 0,
+      "abstention_rate": 1.0,
+      "accuracy": null,
+      "precision": null,
+      "recall": null,
+      "false_positive_rate": null,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      }
+    },
+    "added_noise": {
+      "n_total": 30,
+      "n_abstained": 30,
+      "n_decided": 0,
+      "abstention_rate": 1.0,
+      "accuracy": null,
+      "precision": null,
+      "recall": null,
+      "false_positive_rate": null,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      }
+    },
+    "screenshot_simulated": {
+      "n_total": 30,
+      "n_abstained": 30,
+      "n_decided": 0,
+      "abstention_rate": 1.0,
+      "accuracy": null,
+      "precision": null,
+      "recall": null,
+      "false_positive_rate": null,
+      "confusion": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      }
+    }
+  }
+}

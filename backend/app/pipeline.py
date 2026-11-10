@@ -86,6 +86,22 @@ def analyze_image(path: Path, settings: dict[str, str], report_id: str) -> dict[
         "evidence": evidence_files,
         "metadata_raw": meta_raw,
         "robustness_note": image_forensics.robustness_note(estimated_quality, width, height),
+        "external_lookups": [
+            {
+                "label": "Google Lens (reverse image search)",
+                "url": "https://lens.google.com/upload",
+                "note": "Opens in your browser. This app does not upload your file -- you choose "
+                        "whether to upload it yourself on that site, which is then subject to Google's "
+                        "own privacy policy, not this app's.",
+            },
+            {
+                "label": "TinEye (reverse image search)",
+                "url": "https://tineye.com/",
+                "note": "Opens in your browser. This app does not upload your file -- you choose "
+                        "whether to upload it yourself on that site, which is then subject to TinEye's "
+                        "own privacy policy, not this app's.",
+            },
+        ],
     }
 
 

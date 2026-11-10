@@ -10,4 +10,6 @@ node_modules/
 backend/tests/fixtures/*.jpg
 backend/tests/fixtures/*.wav
 backend/tests/fixtures/*.txt
+backend/tests/fixtures/*.mp4
 !backend/tests/fixtures/make_fixtures.py
+eval/data/
