@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Iterator
 
 from . import config
+from .json_safe import default as _json_default
 
 _lock = threading.Lock()
 
@@ -81,7 +82,7 @@ def save_report(
                VALUES (?,?,?,?,?,?,?,?,?,?)""",
             (
                 report_id, created_at, media_type, original_name, sha256, size_bytes,
-                verdict, confidence_band, json.dumps(report), evidence_dir,
+                verdict, confidence_band, json.dumps(report, default=_json_default), evidence_dir,
             ),
         )
         for tag in tags or []:
